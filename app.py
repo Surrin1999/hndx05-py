@@ -12,10 +12,10 @@ app = Flask(__name__)
 
 
 def set_eureka():
-    server_host = "119.91.26.135"
+    server_host = "software-forecastservice"
     server_port = 8085
-    eureka_client.init(eureka_server="http://119.91.26.135:8086/eureka/",
-                       app_name="FORECAST-SERVICE",
+    eureka_client.init(eureka_server="http://software-eurekaservice:8086/eureka/",
+                       app_name="software-forecastservice",
                        instance_host=server_host,
                        instance_port=server_port)
 
@@ -23,10 +23,9 @@ def set_eureka():
 @app.route('/predict')
 def predict():
     data = request.args.get("data")
-    print(data)
     return get_res(np.array(data.split(',')).reshape(1, 240).astype(np.int32))
 
 
 set_eureka()
 # 不能调DEBUG模式，否则会报错
-app.run(threaded=True, port=8085, host="0.0.0.0")
+app.run(port=8085, host="0.0.0.0")

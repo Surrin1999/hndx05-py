@@ -27,5 +27,4 @@ def predict():
 
 
 set_eureka()
-# 不能调DEBUG模式，否则会报错
 app.run(port=8085, host="0.0.0.0")

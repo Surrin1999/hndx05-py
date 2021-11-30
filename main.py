@@ -4,7 +4,7 @@ from model.model_forecast import model, test
 from data.data_process import dataProcess
 import sys
 
-train_file_path = "data/datasets_final.csv"
+train_file_path = sys.argv[1]
 dataset_train = dataProcess(train_file_path)
 
 model.train(dataset_train)

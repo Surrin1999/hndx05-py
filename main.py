@@ -1,6 +1,6 @@
 import numpy
 import numpy as np
-from model.model_forecast import model, test
+from model.model_forecast import model
 from data.data_process import dataProcess
 import sys
 
@@ -13,9 +13,7 @@ model.save("my_model")
 
 saved_model = model.load_model("my_model")
 
-res_data = saved_model.predict(test("data/datasets_final.csv"))
-
-res_data = str(np.round_(res_data)).replace("[", "").replace("]", "").replace(".", "")
+res_data = saved_model.test('/home/data/test_data.csv')
 
 
 def get_res(data):

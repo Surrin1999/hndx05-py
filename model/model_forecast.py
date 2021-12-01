@@ -9,7 +9,7 @@ from data.data_process import get_date, get_hour
 batch_size = 2048
 
 
-def test(test_path):
+def test_handle(test_path):
     tourist_data = pd.read_csv(test_path)
     pd.set_option('display.float_format', lambda x: '%d' % x)
     tourist_data = tourist_data.loc[tourist_data['set_time'].notnull(), :]
@@ -86,6 +86,9 @@ class Hndx05Net(keras.Model):
         network.build((1, 240))
         network.load_weights(model)
         return network
+
+    def test(self, path):
+        return self.predict(test_handle(path))
 
 
 model = Hndx05Net()

@@ -3,6 +3,7 @@ import numpy as np
 
 batch = 241
 
+
 def get_date(row):
     return row['set_time'][:4]
 
@@ -48,7 +49,6 @@ def dataProcess(file_path='datasets_final.csv'):
     peoples = count_result['people']
     for i in range(len(count_result) - batch + 1):
         train_data = train_data.append(pd.Series(peoples[i:i + batch].tolist(), index=train_column), ignore_index=True)
-
     label = train_data[241]
     train_data.drop([241], axis=1, inplace=True)
     return np.array(train_data), label

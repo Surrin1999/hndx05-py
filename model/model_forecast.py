@@ -23,7 +23,7 @@ class Hndx05Net(tf.keras.Model):
         self.full_connected = tf.keras.Sequential([
             tf.keras.layers.Dense(64, activation='relu'),
             tf.keras.layers.Dense(32, activation='relu'),
-            tf.keras.layers.Dropout(0.4),
+            tf.keras.layers.Dropout(0.3),
             tf.keras.layers.Dense(1),
         ])
 
@@ -43,7 +43,7 @@ class Hndx05Net(tf.keras.Model):
         model.compile(loss=tf.losses.mean_squared_error, optimizer=tf.keras.optimizers.Adam(learning_rate=lr_schedule))
         model.fit(x=tf.data.Dataset.from_tensor_slices((train_x, train_y)).batch(batch_size),
                   validation_data=tf.data.Dataset.from_tensor_slices((valid_x, valid_y)).batch(batch_size),
-                  epochs=1500)
+                  epochs=1000)
 
     def call(self, inputs, mask=None, training=None):
         return self.full_connected(inputs)

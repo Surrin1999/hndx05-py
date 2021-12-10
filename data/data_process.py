@@ -30,20 +30,6 @@ def dataProcess(file_path='datasets_final.csv'):
     for name, group in group_result:
         count_result = count_result.append(pd.Series([name[0], name[1], len(group)], index=['date', 'hour', 'people']),
                                            ignore_index=True)
-
-    pre = 0
-    count = 0
-    exp_mask = []
-    i = 0
-    for index, row in count_result.iterrows():
-        if abs(row['people'] - pre) > 80:
-            print(row)
-            exp_mask.append(i)
-            count += 1
-        i += 1
-        pre = row['people']
-    count_result.drop(labels=exp_mask, axis=0, inplace=True)
-
     train_column = [i + 1 for i in range(241)]
     train_data = pd.DataFrame(columns=train_column)
     peoples = count_result['people']
